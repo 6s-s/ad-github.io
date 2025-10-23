@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>数字展销平台-积分商城</title>
+    <style>
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family:'Microsoft YaHei',sans-serif;
+        }
+        body{
+            background-color:#f5f7fa;
+            color:#333;
+            line-height:1.6;
+        }
+        .container{
+            width:1200px;
+            margin:0 auto;
+            padding:20px;
+        }
+        header{
+            background:linear-gradient(135deg,#87f5a3 0%,#779ee2 100%);
+            color:white;
+            padding:20px 0;
+            border-radius:10px;
+            margin-bottom:20px;
+            box-shadow:0 4px 12px rgba(0,0,0,0.1);
+        }
+        .header-content{
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+            padding:0 30px;
+        }
+        .logo{
+            font-size:28px;
+            font-weight:bold;
+            cursor:pointer;
+        }
+        .user-info{
+            display:flex;
+            align-items:center;
+            gap:15px;
+        }
+        .points-display{
+            background-color:rgba(255,255,255,0.2);
+            padding:8px 15px;
+            border-radius:20px;
+            font-weight:bold;
+            cursor:pointer;
+            transition:all 0.3s ease;
+        }
+        .points-display:hover{
+            background-color:rgba(255,255,255,0.3);
+            transform:scale(1.05);
+        }
+        .main-content{
+            display:flex;
+            gap:20px;
+        }
+        .main-content{
+            display:flex;
+            gap:20px;
+        }
+        .left-nav{
+            width:200px;
+            background-color:white;
+            border-radius:10px;
+            padding:20px;
+            box-shadow:0 4px 12px rgba(0,0,0,0.1);
+        }
+        .nav-title{
+            font-size:18px;
+            margin-bottom:2px solid #6cee6c;
+            padding-bottom:10px;
+            border-bottom:2px solid #77e6ba;
+            color:#71e779;
+        }
+        nav-menu{
+            list-style:none;
+        }
+        .nav-menu li{
+            margin-bottom:12px;
+            padding:10px;
+            border-radius:5px;
+            cursor:pointer;
+            transition:all 0.3s aese;
+        }
+        nav-menu li:hover{
+            background-color:#f0f5ff;
+            color:#7fe8b0;
+            transform:translateX(5px);
+        }
+        .nav-menu li.active{
+            background-color:#e6f0ff;
+            color:#8aefae;
+            font-weight:bold;
+        }
+        .center-content{
+            flex:1;
+            background-color:white;
+            border-radius:10px;
+            padding:20px;
+            box-shadow:0 4px 12px rgba(0,0,0,0.5);
+        }
+        .section-title{
+            font-size:22px;
+            margin-bottom:20px;
+            padding-bottom:20px;
+            border-bottom:2px solid #f0f0f0;
+            color:#333;
+        }
+        .products{
+            display:grid;
+            grid-template-columns:repeat(3,1fr);
+            gap:20px;
+        }
+         .product-card {
+            border: 1px solid #eaeaea;
+            border-radius: 8px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            position: relative;
+            cursor: pointer;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .product-image {
+            height: 160px;
+            background-color: #f9f9f9;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            color: #888;
+        }
+        
+        .product-info {
+            padding: 15px;
+        }
+        
+        .product-title {
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+        
+        .product-points {
+            color: #ff6b6b;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .exchange-btn {
+            background-color: #8ee864;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+            transition: all 0.3s ease;
+        }
+        
+        .exchange-btn:hover {
+            background-color: #6fd9a1;
+        }
+        .right-ads {
+            width: 250px;
+        }
+        
+        .ad-card {
+            background-color: white;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        }
+        
+        .ad-title {
+            font-size: 18px;
+            margin-bottom: 15px;
+            color: #d5e14a;
+        }
+        
+        .points-promo {
+            background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%);
+            color: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+        
+        .points-promo h3 {
+            margin-bottom: 10px;
+        }
+        
+        .points-promo p {
+            font-size: 14px;
+        }
+        footer {
+            margin-top: 30px;
+            background-color: #333;
+            color: white;
+            padding: 20px 0;
+            border-radius: 10px;
+            text-align: center;
+        }
+        .left-nav, .center-content, .right-ads {
+            float: left;
+        }
+        
+        .main-content::after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+        .hot-badge {
+            position: relative;
+            top: -10px;
+            left: -10px;
+            background-color: #ff6b6b;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+        .product-card, .nav-menu li, .points-display, .exchange-btn {
+            cursor: pointer;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="header-content">
+                <div class="logo">数字展销平台</div>
+                <div class="user-info">
+                    <div>欢迎，用户12345</div>
+                    <div class="points-display">积分：2,580</div>
+                    <div>消息</div>
+                    <div>设置</div>
+                </div>
+            </div>
+        </header>
+        
+        <div class="main-content">
+            <div class="left-nav">
+                <h2 class="nav-title">积分中心</h2>
+                <ul class="nav-menu">
+                    <li class="active">积分商城</li>
+                    <li>积分任务</li>
+                    <li>积分规则</li>
+                    <li>积分记录</li>
+                    <li>积分兑换</li>
+                    <li>会员特权</li>
+                    <li>积分抽奖</li>
+                    <li>积分排行榜</li>
+                </ul>
+            </div>
+            <div class="center-content">
+                <h2 class="section-title">积分兑换商品</h2>
+                <div class="products">
+                    <div class="product-card">
+                        <div class="hot-badge">热门</div>
+                        <div class="product-image"><img src="智能手机.jpg" alt="智能手机" width="100%"></div>
+                        <div class="product-info">
+                            <div class="product-title">智能手机</div>
+                            <div class="product-points">1,200 积分</div>
+                            <button class="exchange-btn">立即兑换</button>
+                        </div>
+                    </div>
+                    <div class="product-card">
+                        <div class="product-image"><img src="智能手环.jpg" alt="智能手环" width="100%"></div>
+                        <div class="product-info">
+                            <div class="product-title">智能手环</div>
+                            <div class="product-points">800 积分</div>
+                            <button class="exchange-btn">立即兑换</button>
+                        </div>
+                    </div>
+                    <div class="product-card">
+                        <div class="product-image"><img src="充电宝.jpg" alt="便携充电宝" width="100%"></div>
+                        <div class="product-info">
+                            <div class="product-title">便携充电宝</div>
+                            <div class="product-points">500 积分</div>
+                            <button class="exchange-btn">立即兑换</button>
+                        </div>
+                    </div>
+                    <div class="product-card">
+                        <div class="product-image"><img src="咖啡杯.jpg" alt="咖啡杯套装" width="100%"></div>
+                        <div class="product-info">
+                            <div class="product-title">咖啡杯套装</div>
+                            <div class="product-points">300 积分</div>
+                            <button class="exchange-btn">立即兑换</button>
+                        </div>
+                    </div>
+                    <div class="product-card">
+                        <div class="product-image"><img src="办公文具.jpg" alt="办公文具套装" width="100%"></div>
+                        <div class="product-info">
+                            <div class="product-title">办公文具套装</div>
+                            <div class="product-points">200 积分</div>
+                            <button class="exchange-btn">立即兑换</button>
+                        </div>
+                    </div>
+                    <div class="product-card">
+                        <div class="product-image"><img src="电子书代金券.jpg" alt="电子书代金券" width="100%"></div>
+                        <div class="product-info">
+                            <div class="product-title">电子书代金券</div>
+                            <div class="product-points">100 积分</div>
+                            <button class="exchange-btn">立即兑换</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="right-ads">
+                <div class="ad-card">
+                    <h3 class="ad-title">积分活动</h3>
+                    <div class="points-promo">
+                        <h3>双倍积分周</h3>
+                        <p>本周所有消费均可获得双倍积分，赶快行动吧！</p>
+                    </div>
+                    <div class="points-promo" style="background: linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 100%);">
+                        <h3>新用户福利</h3>
+                        <p>新注册用户赠送200积分，首次兑换享8折优惠！</p>
+                    </div>
+                </div>
+                
+                <div class="ad-card">
+                    <h3 class="ad-title">积分任务</h3>
+                    <ul>
+                        <li>每日签到 +10积分</li>
+                        <li>完善个人信息 +50积分</li>
+                        <li>首次购物 +100积分</li>
+                        <li>邀请好友 +200积分</li>
+                        <li>发表评论 +20积分</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <footer>
+            <p>© 2025 数字展销平台 版权所有 | 积分兑换规则 | 用户协议 | 隐私政策</p>
+        </footer>
+    </div>
+
+    
+</body>
+</html>
